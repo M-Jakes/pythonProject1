@@ -70,28 +70,40 @@ def total_price():
 
 
 def cheapest_price():
-    min_price = 0
+    if not products:
+        print("Seznam produktů je prázdný.")
+        return
+
+    min_price = float('inf')
     cheap_products = []
+
     for product in products:
-        if min_price == 0 or product['price'] < min_price:
+        if product['price'] < min_price:
             min_price = product['price']
             cheap_products = [product]
         elif product['price'] == min_price:
             cheap_products.append(product)
+
     print("Nejlevnější produkt:")
     for product in cheap_products:
         print("Název:", product['name'], ", Cena:", product['price'], "$")
 
 
 def most_expensive_price():
-    max_price = 0
+    if not products:
+        print("Seznam produktů je prázdný.")
+        return
+
+    max_price = float('-inf')
     expensive_products = []
+
     for product in products:
-        if max_price == 0 or product['price'] > max_price:
+        if product['price'] > max_price:
             max_price = product['price']
             expensive_products = [product]
         elif product['price'] == max_price:
             expensive_products.append(product)
+
     print("Nejdražší produkt:")
     for product in expensive_products:
         print("Název:", product['name'], ", Cena:", product['price'], "$")
@@ -156,72 +168,50 @@ def edit_product():
     else:
         print("Produkt nebyl změněn.")
 
-
 def menu():
-    print("VÍTEJ VE SKLADU\n")
-    print("Vyber jednu z možností níže\n")
-    print("1. Výpis položek")
-    print("2. Přidání položky")
-    print("3. Hledání položky")
-    print("4. Cena všech produktů")
-    print("5. Nejlevnější produkt")
-    print("6. Nejdražší produkt")
-    print("7. Průměrná cena produktů")
-    print("8. Upravit produkt\n")
+    while True:
+        print("\nVÍTEJ VE SKLADU")
+        print("Vyber jednu z možností níže\n")
+        print("1. Výpis položek")
+        print("2. Přidání položky")
+        print("3. Hledání položky")
+        print("4. Cena všech produktů")
+        print("5. Nejlevnější produkt")
+        print("6. Nejdražší produkt")
+        print("7. Průměrná cena produktů")
+        print("8. Upravit produkt")
+        print("9. Konec")
 
-    choice = int(input("Volba: "))
+        choice = input("Volba: ")
 
-    if choice == 1:
-        print("Položky na skladě jsou:")
-        print_products()
-        print("")
-        menu()
-
-    elif choice == 2:
-        print("Přidání položky")
-        add_product()
-        print("")
-        menu()
-
-    elif choice == 3:
-        print("Hledání pooložky")
-        search_product()
-        print("")
-        menu()
-
-    elif choice == 4:
-        print("Cena všech produktů")
-        total_price()
-        print("")
-        menu()
-
-    elif choice == 5:
-        print("Nejlevnější produkt")
-        cheapest_price()
-        print("")
-        menu()
-
-    elif choice == 6:
-        print("Nejdrařší produkt")
-        most_expensive_price()
-        print("")
-        menu()
-
-    elif choice == 7:
-        print("Průměrná cena produktů")
-        average_price()
-        print("")
-        menu()
-
-    elif choice == 8:
-        print("Upravit produkt")
-        edit_product()
-        print("")
-        menu()
-
-    else:
-        print("Zadal jsi špatně!\n")
-        menu()
-
+        if choice == "1":
+            print("Položky na skladě jsou:")
+            print_products()
+        elif choice == "2":
+            print("Přidání položky")
+            add_product()
+        elif choice == "3":
+            print("Hledání položky")
+            search_product()
+        elif choice == "4":
+            print("Cena všech produktů")
+            total_price()
+        elif choice == "5":
+            print("Nejlevnější produkt")
+            cheapest_price()
+        elif choice == "6":
+            print("Nejdražší produkt")
+            most_expensive_price()
+        elif choice == "7":
+            print("Průměrná cena produktů")
+            average_price()
+        elif choice == "8":
+            print("Upravit produkt")
+            edit_product()
+        elif choice == "9":
+            print("Program byl ukončen")
+            break
+        else:
+            print("Zadal jsi špatně! Zkus to znovu.\n")
 
 menu()
