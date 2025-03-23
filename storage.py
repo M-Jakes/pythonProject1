@@ -9,7 +9,7 @@ products = [
     },
     {
         "name": "Mercedes",
-        "price": 60
+        "price": 80
     },
     {
         "price": 30,
@@ -69,6 +69,20 @@ def cheapest_price():
     for product in cheap_products:
         print("Název:", product['name'], ", Cena:", product['price'], "$")
 
+def most_expensive_price():
+    max_price = 0
+    expensive_products = []
+    for product in products:
+        if max_price == 0 or product['price'] > max_price:
+            max_price = product['price']
+            expensive_products = [product]
+        elif product['price'] == max_price:
+            expensive_products.append(product)
+    print("Nejdražší produkt:")
+    for product in expensive_products:
+        print("Název:", product['name'], ", Cena:", product['price'], "$")
+
+
 def menu():
     print("Vítej ve skladu")
     print("###############\n")
@@ -76,7 +90,8 @@ def menu():
     print("2. Přidání položky")
     print("3. Hledání položky")
     print("4. Cena všech produktů")
-    print("5. Nejlevnější produkt\n")
+    print("5. Nejlevnější produkt")
+    print("6. Nejdražší produkt\n")
 
     choice = int(input("Volba: "))
 
@@ -107,6 +122,12 @@ def menu():
     elif choice == 5:
         print("Nejlevnější produkt")
         cheapest_price()
+        print("")
+        menu()
+
+    elif choice == 6:
+        print("Nejdrařší produkt")
+        most_expensive_price()
         print("")
         menu()
 
