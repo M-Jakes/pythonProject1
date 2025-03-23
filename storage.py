@@ -158,7 +158,7 @@ def edit_product():
         try:
             new_price = float(input("Zadejte novou cenu: "))
             if new_price != original_price:
-                product['price'] = new_price
+                product['price'] = int(new_price)
                 changed = True
         except ValueError:
             print("Neplatná cena!")
@@ -167,6 +167,29 @@ def edit_product():
         print("Produkt byl upraven.")
     else:
         print("Produkt nebyl změněn.")
+
+
+def delete_product():
+    if not products:
+        print("Žádné produkty k odstranění.")
+        return
+    index = 0
+    for product in products:
+        print(index, "-", product['name'], ":", product['price'], "$")
+        index += 1
+
+    try:
+        index_to_delete = int(input("Zadejte číslo produktu, který chcete odstranit: "))
+
+        if index_to_delete < 0 or index_to_delete >= len(products):
+            print("Neplatné číslo produktu.")
+            return
+
+        deleted_product = products.pop(index_to_delete)
+        print(f"Produkt '{deleted_product['name']}' byl úspěšně odstraněn.")
+
+    except ValueError:
+        print("Musíte zadat číslo!")
 
 def menu():
     while True:
@@ -180,7 +203,8 @@ def menu():
         print("6. Nejdražší produkt")
         print("7. Průměrná cena produktů")
         print("8. Upravit produkt")
-        print("9. Konec")
+        print("9. Odstranit produkt")
+        print("10. Konec")
 
         choice = input("Volba: ")
 
@@ -209,8 +233,13 @@ def menu():
             print("Upravit produkt")
             edit_product()
         elif choice == "9":
-            print("Program byl ukončen")
+            print("Odstranit produkt")
+            delete_product()
+        elif choice == "10":
+            print("Program ukončen")
             break
+
         else:
             print("Zadal jsi špatně! Zkus to znovu.\n")
+
 menu()
