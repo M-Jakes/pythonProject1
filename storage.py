@@ -48,13 +48,19 @@ def search_product():
         print("Žádné produkty nenalezeny.")
 
 
+def total_price():
+    total = 0
+    for product in products:
+        total += product['price']
+    print("Celková cena všech produktů:", total, "$")
 
 def menu():
     print("Vítej ve skladu")
     print("###############\n")
     print("1. Výpis polože")
     print("2. Přidání položky")
-    print("3. Hledání položky\n")
+    print("3. Hledání položky")
+    print("4. Cena všech produktů\n")
 
     choice = int(input("Volba: "))
 
@@ -73,6 +79,12 @@ def menu():
     elif choice == 3:
         print("Hledání pooložky")
         search_product()
+        print("")
+        menu()
+
+    elif choice == 4:
+        print("Cena všech produktů")
+        total_price()
         print("")
         menu()
 
