@@ -213,5 +213,4 @@ def menu():
             break
         else:
             print("Zadal jsi špatně! Zkus to znovu.\n")
-
 menu()
