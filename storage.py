@@ -36,6 +36,7 @@ def add_product():
     }
     products.append(product2)
 
+
 def search_product():
     query = input("Zadej název nebo část názvu produktu: ").lower()
     found = []
@@ -50,11 +51,13 @@ def search_product():
     else:
         print("Žádné produkty nenalezeny.")
 
+
 def total_price():
     total = 0
     for product in products:
         total += product['price']
     print("Celková cena všech produktů:", total, "$")
+
 
 def cheapest_price():
     min_price = 0
@@ -68,6 +71,7 @@ def cheapest_price():
     print("Nejlevnější produkt:")
     for product in cheap_products:
         print("Název:", product['name'], ", Cena:", product['price'], "$")
+
 
 def most_expensive_price():
     max_price = 0
@@ -83,6 +87,20 @@ def most_expensive_price():
         print("Název:", product['name'], ", Cena:", product['price'], "$")
 
 
+def average_price():
+    total = 0
+    count = 0
+    for product in products:
+        total += product['price']
+        count += 1
+
+    if count > 0:
+        avg = total / count
+        print("Průměrná cena produktů:", avg, "$")
+    else:
+        print("Nebyly nalezeny žádné produkty")
+
+
 def menu():
     print("Vítej ve skladu")
     print("###############\n")
@@ -91,7 +109,8 @@ def menu():
     print("3. Hledání položky")
     print("4. Cena všech produktů")
     print("5. Nejlevnější produkt")
-    print("6. Nejdražší produkt\n")
+    print("6. Nejdražší produkt")
+    print("7. Průměrná cena produktů\n")
 
     choice = int(input("Volba: "))
 
@@ -131,8 +150,15 @@ def menu():
         print("")
         menu()
 
+    elif choice == 7:
+        print("Průměrná cena produktů")
+        average_price()
+        print("")
+        menu()
+
     else:
         print("Zadal jsi špatně!\n")
         menu()
+
 
 menu()
